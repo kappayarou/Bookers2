@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
+
+      <h2>User info</h2>
+      <div class ="caution">
+        <% if @errors_list %>
+          <% if @errors_list.errors.any? %>
+            <%= @errors_list.errors.count %>件のerrorが発生しました。<br>
+            <% @errors_list.errors.full_messages.each do |error| %>
+              <%= error %><br>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <%= form_with model: @user, local:true do |f| %>
+        <div class="form-group">
+          <label for="user_name">Name</label><br>
+          <%= f.text_field :name, id:"user_name" %>
+        </div>
+        <div>
+          <label for="inputImage">ProfileImage</label>
+          <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
+        </div>
+        <div class="form-group">
+          <label for="user_introduction">Introduction</label><br>
+          <%= f.text_area :introduction, id:"user_introduction" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit 'Update User', class:"btn btn-success" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
